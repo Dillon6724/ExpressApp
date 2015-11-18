@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<h1>Log in!</h1>
+<br/>
+<form action="/users" method="POST">
+	<input type="text" placeholder="username" name="user[name]"><br/>
+	<input type="password" placeholder="password" name="user[password]"><br/>
+	<input type="submit"><br/>
+</form>
+<br/>
+<br/>
+<br/>
+<h1>or... Sign up!</h1>
+<form action="/user/new" method="POST">
+	<input type="text" placeholder="create a username" name="user[name]"><br/>
+	<input type="password" placeholder="create a password" name="user[password]"><br/>
+	<input type="submit"><br/>
+</form>

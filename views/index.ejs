@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<h1>Your MoodBoard</h1>
+<h2>How are you feeling?</h2>
+<form action="/mood/new" method="POST">
+	<select name="color">
+
+
+
+
+
+
+
+
+
+
+
+		<option value=""> Choose current mood</option>
+		<option value="CF74A1"> Blissfull </option>
+		<option value="CF74CC"> Excited </option>
+		<option value="B274CF"> Joyful </option>
+		<option value="8A74CF"> Happy </option>
+		<option value="7474CF"> Content </option>
+		<option value="749BCF"> Neutral </option>
+		<option value="74BFCF"> Tired </option>
+		<option value="74CFAF"> Anxious </option>
+		<option value="74CF84"> Sad </option>
+		<option value="ACCF74"> Angry </option>
+		<option value="CFC274"> Depressed </option>
+	</select>
+	<input type="submit">
+</form>
+<div class="mood-container">
+	<% moods.forEach(function(mood) {%>
+		<div class="mood" style="background-color: #<%= mood.color %>;"></div>
+	<%});%>
+	
+</div>

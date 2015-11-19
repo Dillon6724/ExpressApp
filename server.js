@@ -1,19 +1,20 @@
-var mongoose  = require('mongoose'),
-  server      = require('./lib/create-server')(),
-  PORT        = process.env.PORT || 3000,
-  dbname      = 'moodboard'
-  MONGOURI    = process.env.MONGOLAB_URI || 'mongodb://localhost:27017',
-  Schema      = mongoose.Schema,
-  verifyLogIn = function (req, res, next) {
-  	if (req.session.currentUser) {
-  		next()
-  	} else {
-  		res.redirect(302, '/')
-  	}
-  };
+var mongoose    = require('mongoose'),
+    server      = require('./lib/create-server')(),
+    PORT        = process.env.PORT || 3000,
+    dbname      = 'moodboard'
+    MONGOURI    = process.env.MONGOLAB_URI || 'mongodb://localhost:27017',
+    Schema      = mongoose.Schema;
 
-///////////////////  MONGOOSE    /////////////////////
-/////////////////////////////////////////////////////
+var verifyLogIn = function (req, res, next) {
+	if (req.session.currentUser) {
+		next()
+	} else {
+    res.redirect(302, '/')
+	}
+};
+
+// /////////////////  MONGOOSE    /////////////////////
+// ///////////////////////////////////////////////////
 
 var userSchema = new Schema({
   name: { type: String, requiered: true, unique: true },
@@ -25,8 +26,8 @@ var userSchema = new Schema({
 var User = mongoose.model('user', userSchema)
 mongoose.connect(MONGOURI + '/' + dbname)
 
-///////////////    ROUTES     /////////////////
-//////////////////////////////////////////////
+// /////////////    ROUTES     /////////////////
+// ////////////////////////////////////////////
 
 //           CREATE A NEW USER
 server.post('/user/new', function (req, res) {
@@ -109,8 +110,8 @@ server.post('/logout', function (req, res) {
 
 //             MOOD INDEX
 server.get('/mymoods', verifyLogIn, function (req, res) {
-  //find a user based on the current user
-  thisUser = User.findOne({name: req.session.currentUser},
+  // find a user based on the current user
+  User.findOne({name: req.session.currentUser},
   function (err, user) {
     if (!err) {
       // render index.ejs with the currentUsers object availible
@@ -127,7 +128,8 @@ server.get('/', function (req, res) {
   res.render('login', {})
 })
 
-///////////////     SERVER LISTENING    /////////////
+// /////////////     SERVER LISTENING    /////////////
+// ///////////////////////////////////////////////////
 server.listen(PORT, function () {
   console.log('SERVER IS UP:', PORT)
 })

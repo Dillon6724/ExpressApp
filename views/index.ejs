@@ -35,9 +35,9 @@
 
 <div class="right-col">
 <%user.moods.reverse().forEach( function(mood, i){%>
-	<div class="mood" 
+	<div class="mood"
 				style="background-color: #<%= mood%>; height: <%= 550/user.moods.length %>px">
-		<p class="des hidden"><%=user.moodDescription[i] %></p>
+		<p class="des hidden"><%=user.moodDescription.reverse()[i] %></p>
 	</div>
 <% }); %>
 </div>
@@ -45,4 +45,3 @@
 <form action="/logout" method="POST">
 	<input class="logout" type="submit" value="Log Out">
 </form>
-

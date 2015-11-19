@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-<h1>Your MoodBoard</h1>
-<h2>How are you feeling?</h2>
-<form action="/mood/new" method="POST">
-	<select name="color">
-
-
-
-
-
-
-
-
-
-
-
-		<option value=""> Choose current mood</option>
-		<option value="CF74A1"> Blissfull </option>
-		<option value="CF74CC"> Excited </option>
-		<option value="B274CF"> Joyful </option>
-		<option value="8A74CF"> Happy </option>
-		<option value="7474CF"> Content </option>
-		<option value="749BCF"> Neutral </option>
-		<option value="74BFCF"> Tired </option>
-		<option value="74CFAF"> Anxious </option>
-		<option value="74CF84"> Sad </option>
-		<option value="ACCF74"> Angry </option>
-		<option value="CFC274"> Depressed </option>
-	</select>
-	<input type="submit">
-</form>
-<div class="mood-container">
-	<% moods.forEach(function(mood) {%>
-		<div class="mood" style="background-color: #<%= mood.color %>;"></div>
-	<%});%>
-	
+<div class="left-col">
+	<h1 class="title">Mood Diary</h1>
+	<h2 id="description">Click on an old mood to see your entry!</h2>
+	<form action="/mood/new" method="POST">
+		<select class="styled-select" name="mood[color]">&#9660;
+			<option> My Current Mood</option>
+			<option value="ccb8e0"> Bliss </option>
+			<option value="bfa6d9"> Excited </option>
+			<option value="b294d1"> Joyful </option>
+			<option value="a682ca"> Happy </option>
+			<option value="9970c2"> Content </option>
+			<option value="8c5eba"> Neutral </option>
+			<option value="7f4cb3"> Tired </option>
+			<option value="7345a1"> Anxious </option>
+			<option value="663d8f"> Sad </option>
+			<option value="59357d"> Angry </option>
+			<option value="4c2e6b"> Depressed </option>
+		</select>
+		<input class="why" type="text" name="mood[description]" placeholder="Why?"><br/>
+		<input class="submit" type="submit">
+	</form>
+	<div class="key" style="background-color: #ccb8e0">Bliss</div>
+	<div class="key" style="background-color: #bfa6d9">Excited</div>
+	<div class="key" style="background-color: #b294d1">Joyful</div>
+	<div class="key" style="background-color: #a682ca">Happy</div>
+	<div class="key" style="background-color: #9970c2">Content</div>
+	<div class="key" style="background-color: #8c5eba">Neutral</div>
+	<div class="key" style="background-color: #7f4cb3">Tired</div>
+	<div class="key" style="background-color: #7345a1">Anxious</div>
+	<div class="key" style="background-color: #663d8f">Sad</div>
+	<div class="key" style="background-color: #59357d">Angry</div>
+	<div class="key" style="background-color: #4c2e6b">Depressed</div>
 </div>
+
+<div class="right-col">
+	<% user.moods.forEach(function (mood, i) { %>
+		<div class="mood" style="background-color: #<%= mood %>; height: <%= 550/user.moods.length %>px"><p class="des hidden"><%=user.moodDescription[i] %></p></div>
+	<% }); %>
+</div>
+

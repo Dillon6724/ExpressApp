@@ -16,14 +16,11 @@ var mongoose = require('mongoose'),
 var userSchema = new Schema({
   name: {type: String, requiered: true, unique: true },
   password: {type: String, requiered: true, unique: false },
-});
-
-var moodSchema = new Schema({
-  color: {type: String, requiered: true, unique: false}
+  moods:{type: [String], requiered: true, unique: false},
+  moodDescription:{type:[String]},
 });
 
 var User = mongoose.model('user', userSchema);
-var Mood = mongoose.model('mood', moodSchema);
 mongoose.connect(MONGOURI + '/' + dbname);
 
 ///////////////    ROUTES     /////////////////
@@ -46,10 +43,12 @@ server.post('/user/new', function (req, res) {
 });
 
 server.get('/mymoods', verifyLogIn, function (req, res) {
-  Mood.find({}, function(err, moods) {
+  thisUser = User.findOne({name: req.session.currentUser},
+  function(err, user) {
+    console.log(user)
     if (!err) {
       res.render('index', {
-        moods: moods
+        user: user
       });
     } else {
         console.log(err)
@@ -70,16 +69,28 @@ server.post('/users', function (req, res) {
 });
  
 server.post('/mood/new', function (req, res) {
-  var color = req.body.color,
-      newColor = new Mood({color: color})
+  var color = req.body.mood.color;
+  var description = req.body.mood.description;
 
-  newColor.save(function (err, mood) {
+  User.findOne({name: req.session.currentUser},
+  function(err, user) {
     if (!err) {
-      console.log(mood)
-      res.redirect(302, '/mymoods');
+      User.findByIdAndUpdate(user._id, { $push: {moods: color } },
+      function (err, updatedMood) {
+        if (!err) {
+          User.findByIdAndUpdate(user._id, { $push: {moodDescription: description } },
+          function (err, updatedMood) {
+            if (!err) {
+              res.redirect(302, '/mymoods');
+            };
+          });
+        } else {
+          console.log(err);
+        }
+      });
     } else {
         console.log(err);
-    };
+    }
   });
 })
 

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<h1>Log in!</h1>
-<br/>
-<form action="/users" method="POST">
-	<input type="text" placeholder="username" name="user[name]"><br/>
-	<input type="password" placeholder="password" name="user[password]"><br/>
-	<input type="submit"><br/>
-</form>
-<br/>
-<br/>
-<br/>
-<h1>or... Sign up!</h1>
-<form action="/user/new" method="POST">
-	<input type="text" placeholder="create a username" name="user[name]"><br/>
-	<input type="password" placeholder="create a password" name="user[password]"><br/>
-	<input type="submit"><br/>
-</form>
+<div class="login-body">
+	<div class="login-container">
+		<h1 class="login-title">Login to Your Mood Diary</h1>
+		<br/>
+		<form action="/users" method="POST">
+			<input class="login-text" type="text" placeholder="username" name="user[name]"><br/>
+			<input class="login-text" type="password" placeholder="password" name="user[password]"><br/>
+			<input class="login-submit" type="submit" value="log in"><br/>
+		</form>
+		<br/>
+		<br/>
+		<br/>
+		<h1 class="login-title">Create a New Mood Diary</h1>
+		<form action="/user/new" method="POST">
+			<input class="login-text" type="text" placeholder="create a username" name="user[name]"><br/>
+			<input class="login-text" type="password" placeholder="create a password" name="user[password]"><br/>
+			<input class="login-submit" type="submit" value="sign up"><br/>
+		</form>
+	</div>
+</div>

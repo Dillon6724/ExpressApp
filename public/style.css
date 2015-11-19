@@ -15,7 +15,7 @@ body {
 
 .mood:hover {
 	cursor: pointer;
-	border: 10px solid;
+	border: 2px solid;
 	border-color: yellow;
 
 }
@@ -49,7 +49,7 @@ body {
 	margin-bottom: 2%
 }
 
-.submit:hover {
+.submit:hover, .logout:hover {
 	background-color:#8c5eba;
 	color:white;
 	cursor: pointer;
@@ -104,7 +104,67 @@ body {
 	margin-top: 2%;
 }
 
+.logout {
+	position: fixed;
+	top: 10px;
+	background-color: #f2f2f2;
+	border: none;
+	color: #8c5eba;
+	left: 10px;
+	border: 1px solid #8c5eba;
+	padding: 2px;
+}
 
 
+@keyframes logincolors {
+    0% 		{background-color: #ccb8e0;}
+    50% 	{background-color: #4c2e6b;}
+    100% 		{background-color: #ccb8e0;}
+}
+
+/* The element to apply the animation to */
+.login-body {
+    width: 100%;
+    height: 100vh;
+
+
+    animation-name: logincolors;
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+}
+
+
+.login-container {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+
+.login-title {
+	font-size: 50px;
+	color: white;
+	text-shadow: 2px 2px black;
+}
+
+.login-text , .login-submit {
+	width: 40%;
+	height: 40px;
+	font-size: 30px;
+	margin-bottom: 3%;
+}
+
+.login-submit {
+	height: 40px;
+	border: none;
+	background-color: transparent;
+	color: white;
+	text-shadow: 2px 2px black;
+}
+
+.login-submit:hover {
+	color: lightblue;
+	cursor: pointer;
+}
 
 

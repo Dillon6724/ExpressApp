@@ -4,7 +4,7 @@
 	<h2 id="description">Click on an old mood to see your entry!</h2>
 	<form action="/mood/new" method="POST">
 		<select class="styled-select" name="mood[color]">&#9660;
-			<option> My Current Mood</option>
+			<option disabled selected> Choose your Mood</option>
 			<option value="ccb8e0"> Bliss </option>
 			<option value="bfa6d9"> Excited </option>
 			<option value="b294d1"> Joyful </option>
@@ -34,8 +34,15 @@
 </div>
 
 <div class="right-col">
-	<% user.moods.forEach(function (mood, i) { %>
-		<div class="mood" style="background-color: #<%= mood %>; height: <%= 550/user.moods.length %>px"><p class="des hidden"><%=user.moodDescription[i] %></p></div>
-	<% }); %>
+<%user.moods.reverse().forEach( function(mood, i){%>
+	<div class="mood" 
+				style="background-color: #<%= mood%>; height: <%= 550/user.moods.length %>px">
+		<p class="des hidden"><%=user.moodDescription[i] %></p>
+	</div>
+<% }); %>
 </div>
+
+<form action="/logout" method="POST">
+	<input class="logout" type="submit" value="Log Out">
+</form>
 

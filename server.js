@@ -38,6 +38,8 @@ server.post('/user/new', function (req, res) {
   var newUser = new User(userInfo)
   // create new session
   req.session.currentUser = userInfo.name
+  console.log(userInfo.name);
+  console.log(req.session.currentUser);
   // save the  newUser in to the db
   newUser.save(function (err, order) {
     if (!err) {
@@ -110,8 +112,8 @@ server.post('/logout', function (req, res) {
 })
 
 //             MOOD INDEX
-// server.get('/mymoods', verifyLogIn, function (req, res) {
-server.get('/mymoods', function (req, res) {
+server.get('/mymoods', verifyLogIn(), function (req, res) {
+// server.get('/mymoods', function (req, res) {
 
   // find a user based on the current user
   User.findOne({name: req.session.currentUser},

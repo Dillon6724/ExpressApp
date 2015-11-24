@@ -25,6 +25,7 @@ var userSchema = new Schema({
 
 var User = mongoose.model('user', userSchema)
 mongoose.connect(MONGOURI + '/' + dbname)
+mongoose.set('debug', true)
 
 // /////////////    ROUTES     /////////////////
 // ////////////////////////////////////////////
@@ -56,9 +57,9 @@ server.post('/users', function (req, res) {
   // find a user based on the name entered
   User.findOne({ name: attempt.name }, function (err, user) {
     if (user && user.password === attempt.password) {
-        //if the user id found set current user in session to that users name
+        // if the user id found set current user in session to that users name
         req.session.currentUser = user.name
-        //go to index page
+        // go to index page
         res.redirect(301, '/mymoods')
     } else {
       console.log(err)
@@ -69,10 +70,10 @@ server.post('/users', function (req, res) {
 
 //         CREATE NEW MOOD
 server.post('/mood/new', function (req, res) {
-  //set information from form into variables
+  // set information from form into variables
   var color = req.body.mood.color
   var description = req.body.mood.description
-  //find a user based on the current user
+  // find a user based on the current user
   User.findOne({name: req.session.currentUser},
   function (err, user) {
     if (!err) {
@@ -109,7 +110,9 @@ server.post('/logout', function (req, res) {
 })
 
 //             MOOD INDEX
-server.get('/mymoods', verifyLogIn, function (req, res) {
+// server.get('/mymoods', verifyLogIn, function (req, res) {
+server.get('/mymoods', function (req, res) {
+
   // find a user based on the current user
   User.findOne({name: req.session.currentUser},
   function (err, user) {

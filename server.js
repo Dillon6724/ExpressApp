@@ -5,14 +5,6 @@ var mongoose    = require('mongoose'),
     MONGOURI    = process.env.MONGOLAB_URI || 'mongodb://localhost:27017',
     Schema      = mongoose.Schema;
 
-// var verifyLogIn = function (req, res, next) {
-// 	if (req.session.currentUser) {
-// 		next()
-// 	} else {
-//     res.redirect(302, '/')
-// 	}
-// };
-
 // /////////////////  MONGOOSE    /////////////////////
 // ///////////////////////////////////////////////////
 

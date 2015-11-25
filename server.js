@@ -5,13 +5,13 @@ var mongoose    = require('mongoose'),
     MONGOURI    = process.env.MONGOLAB_URI || 'mongodb://localhost:27017',
     Schema      = mongoose.Schema;
 
-var verifyLogIn = function (req, res, next) {
-	if (req.session.currentUser) {
-		next()
-	} else {
-    res.redirect(302, '/')
-	}
-};
+// var verifyLogIn = function (req, res, next) {
+// 	if (req.session.currentUser) {
+// 		next()
+// 	} else {
+//     res.redirect(302, '/')
+// 	}
+// };
 
 // /////////////////  MONGOOSE    /////////////////////
 // ///////////////////////////////////////////////////
@@ -37,7 +37,7 @@ server.post('/user/new', function (req, res) {
   // createing a newUser using information form the sign up form
   var newUser = new User(userInfo)
   // create new session
-  req.session.currentUser = userInfo.name
+  req.session.currentUser = req.body.user.name
   console.log(userInfo.name);
   console.log(req.session.currentUser);
   // save the  newUser in to the db
@@ -112,21 +112,23 @@ server.post('/logout', function (req, res) {
 })
 
 //             MOOD INDEX
-server.get('/mymoods', verifyLogIn(), function (req, res) {
+server.get('/mymoods',  function (req, res) {
 // server.get('/mymoods', function (req, res) {
-
-  // find a user based on the current user
-  User.findOne({name: req.session.currentUser},
-  function (err, user) {
-    if (!err) {
-      // render index.ejs with the currentUsers object availible
-      res.render('index', {
-        user: user
-      })
-    } else {
-      console.log(err)
-    }
-  })
+  if (req.session.currentUser) {
+    User.findOne({name: req.session.currentUser},
+    function (err, user) {
+      if (!err) {
+        // render index.ejs with the currentUsers object availible
+        res.render('index', {
+          user: user
+        })
+      } else {
+        console.log(err)
+      }
+    })
+  } else {
+    res.redirect(302, '/')
+  }
 })
 //           LOGIN / SIGNUP
 server.get('/', function (req, res) {

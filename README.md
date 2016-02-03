@@ -1,3 +1,3 @@
 # Mood Diary
 
-Visit the app at: mooddiary.herokuapp.com
+Visit the app at: https://mooddiary.herokuapp.com
